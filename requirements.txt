@@ -1,0 +1,10 @@
+Django==6.0.4
+django-environ==0.13.0
+Pillow==12.2.0
+django-widget-tweaks==1.5.1
+psycopg[binary]==3.3.3
+whitenoise==6.12.0
+gunicorn==25.3.0
+django-filter
+openpyxl==3.1.5
+django-ckeditor-5==0.2.20
