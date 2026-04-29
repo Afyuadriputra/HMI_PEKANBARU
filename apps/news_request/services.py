@@ -9,26 +9,39 @@ from apps.news_request.models import NewsRequestPayment, NewsUploadRequest
 
 @transaction.atomic
 def create_news_request(form):
-    news_request = form.save(commit=False)
-    news_request.price = news_request.price or 50000
-    news_request.status = NewsUploadRequest.STATUS_WAITING_PAYMENT
-    news_request.save()
+    if hasattr(form, "validated_data") and not hasattr(form, "cleaned_data"):
+        news_request = form.save(price=50000, status=NewsUploadRequest.STATUS_PENDING)
+    else:
+        news_request = form.save(commit=False)
+        news_request.price = news_request.price or 50000
+        news_request.status = NewsUploadRequest.STATUS_PENDING
+        news_request.save()
+
     NewsRequestPayment.objects.create(request=news_request, amount=news_request.price)
     return news_request
 
 
 @transaction.atomic
 def upload_payment_proof(form):
-    payment = form.save(commit=False)
+    if hasattr(form, "validated_data") and not hasattr(form, "cleaned_data"):
+        payment = form.save(payment_status=NewsRequestPayment.STATUS_PAID)
+    else:
+        payment = form.save(commit=False)
+        payment.payment_status = NewsRequestPayment.STATUS_PAID
+        payment.save()
+
     payment.payment_status = NewsRequestPayment.STATUS_PAID
     payment.request.status = NewsUploadRequest.STATUS_PAID
     payment.request.save(update_fields=["status", "updated_at"])
-    payment.save()
+    payment.save(update_fields=["payment_status", "payment_method", "payment_proof", "updated_at"])
     return payment
 
 
 @transaction.atomic
 def verify_payment(payment, user):
+    if payment.payment_status != NewsRequestPayment.STATUS_PAID:
+        raise ValidationError("Pembayaran harus berstatus paid sebelum diverifikasi.")
+
     payment.payment_status = NewsRequestPayment.STATUS_VERIFIED
     payment.verified_by = user
     payment.verified_at = timezone.now()
@@ -40,6 +53,9 @@ def verify_payment(payment, user):
 
 @transaction.atomic
 def approve_request(news_request, user, notes=""):
+    if news_request.status != NewsUploadRequest.STATUS_PAID:
+        raise ValidationError("Request berita harus paid sebelum approve.")
+
     news_request.status = NewsUploadRequest.STATUS_APPROVED
     news_request.reviewed_by = user
     news_request.reviewed_at = timezone.now()

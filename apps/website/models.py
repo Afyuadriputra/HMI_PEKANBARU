@@ -54,3 +54,40 @@ class NavigationMenu(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+
+class ContactMessage(TimeStampedModel):
+    STATUS_UNREAD = "unread"
+    STATUS_READ = "read"
+    STATUS_REPLIED = "replied"
+
+    STATUS_CHOICES = [
+        (STATUS_UNREAD, "Unread"),
+        (STATUS_READ, "Read"),
+        (STATUS_REPLIED, "Replied"),
+    ]
+
+    sender_name = models.CharField(max_length=150)
+    sender_email = models.EmailField(max_length=150)
+    sender_phone = models.CharField(max_length=50, blank=True)
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default=STATUS_UNREAD,
+    )
+    handled_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        related_name="handled_contact_messages",
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        db_table = "contact_messages"
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.sender_name} - {self.subject}"

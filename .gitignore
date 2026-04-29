@@ -1,7 +1,6 @@
 # ============================================================
 # Python
 # ============================================================
-
 __pycache__/
 *.py[cod]
 *$py.class
@@ -11,152 +10,131 @@ __pycache__/
 
 
 # ============================================================
-# Virtual Environment
+# Virtual Environments
 # ============================================================
-
 .venv/
 venv/
 env/
 ENV/
+.envrc
 
 
 # ============================================================
-# Django
+# Django Runtime Files
 # ============================================================
-
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-
-media/
+db.sqlite3-shm
+db.sqlite3-wal
 staticfiles/
+media/
+uploads/
 
 
 # ============================================================
-# Environment Variables
+# Environment Variables / Secrets
 # ============================================================
-
 .env
-.env.local
-.env.development
-.env.production
-.env.test
-
-
-# ============================================================
-# Keep env example
-# ============================================================
-
+.env.*
 !.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+credentials.json
+token.json
+client_secret.json
+service-account*.json
 
 
 # ============================================================
-# PostgreSQL / Database Backup
+# Database Dumps / Backups
 # ============================================================
-
 *.sql
 *.dump
 *.backup
 *.bak
+*.psql
 
 
 # ============================================================
-# Uploaded Files / User Files
+# Test / Coverage / Quality Cache
 # ============================================================
-
-uploads/
-media/
-*.pdf
-*.doc
-*.docx
-*.xls
-*.xlsx
-
-
-# ============================================================
-# Static Build Output
-# ============================================================
-
-staticfiles/
-dist/
-build/
-
-
-# ============================================================
-# Cache
-# ============================================================
-
 .cache/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
 .coverage
+.coverage.*
+coverage.xml
 htmlcov/
+.tox/
+.nox/
+
+
+# ============================================================
+# Build Output
+# ============================================================
+dist/
+build/
+site/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+
+# ============================================================
+# Node / Frontend Tooling
+# ============================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vite/
+.next/
+out/
 
 
 # ============================================================
 # IDE / Editor
 # ============================================================
-
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
+*.swp
+*.swo
 
 
 # ============================================================
 # OS Files
 # ============================================================
-
 .DS_Store
 Thumbs.db
 desktop.ini
 
 
 # ============================================================
-# Logs
+# Temporary / Archive Files
 # ============================================================
-
-logs/
-*.log
-
-
-# ============================================================
-# Node / Tailwind Build
-# Tidak dipakai karena kamu pakai Tailwind CDN,
-# tapi tetap aman kalau nanti ada file frontend.
-# ============================================================
-
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-
-
-# ============================================================
-# Secrets / Credentials
-# ============================================================
-
-*.pem
-*.key
-*.crt
-credentials.json
-token.json
-client_secret.json
-
-
-# ============================================================
-# Backup Files
-# ============================================================
-
+*.tmp
+*.temp
+*.old
+*.orig
+*.rej
 *.zip
 *.rar
 *.7z
 *.tar
 *.gz
-*.old
-*.tmp
-*.temp
-*.swp
+
+
+# ============================================================
+# Local Generated API Artifacts
+# ============================================================
+openapi.json
+schema.json

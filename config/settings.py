@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # Third party apps
+    "corsheaders",
+    "rest_framework",
+    "drf_spectacular",
     "widget_tweaks",
     "django_filters",
     "django_ckeditor_5",
@@ -68,6 +71,7 @@ INSTALLED_APPS = [
     "apps.training.apps.TrainingConfig",
     "apps.administration.apps.AdministrationConfig",
     "apps.news_request.apps.NewsRequestConfig",
+    "apps.api.apps.ApiConfig",
 ]
 
 if DEBUG:
@@ -83,6 +87,7 @@ if DEBUG:
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -246,6 +251,50 @@ LOGOUT_REDIRECT_URL = "accounts:login"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+
+# ============================================================
+# API / CORS
+# ============================================================
+
+CORS_ALLOWED_ORIGINS = env.list(
+    "CORS_ALLOWED_ORIGINS",
+    default=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
+)
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+    "DEFAULT_FILTER_BACKENDS": [
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+    ],
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.FormParser",
+        "rest_framework.parsers.MultiPartParser",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "SI-HMI Pekanbaru API",
+    "DESCRIPTION": "Kontrak API untuk frontend terpisah seperti React.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
 
 
 # ============================================================

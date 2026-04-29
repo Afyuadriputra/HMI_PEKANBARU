@@ -1,6 +1,5 @@
-from django.db import models
+import uuid
 
-# Create your models here.
 from django.conf import settings
 from django.db import models
 
@@ -27,6 +26,7 @@ class NewsUploadRequest(TimeStampedModel):
     requester_name = models.CharField(max_length=150)
     requester_email = models.EmailField(max_length=150, blank=True)
     requester_phone = models.CharField(max_length=50, blank=True)
+    tracking_code = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     title = models.CharField(max_length=200)
     category = models.ForeignKey(
         "content.NewsCategory",

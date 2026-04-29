@@ -20,6 +20,12 @@ def apply_tailwind(form):
     return form
 
 
+def allow_auto_slug(form):
+    if "slug" in form.fields:
+        form.fields["slug"].required = False
+    return form
+
+
 class ProgramForm(forms.ModelForm):
     class Meta:
         model = Program
@@ -28,6 +34,7 @@ class ProgramForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        allow_auto_slug(self)
         apply_tailwind(self)
 
     def clean_image(self):
@@ -51,6 +58,7 @@ class EventForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        allow_auto_slug(self)
         apply_tailwind(self)
 
     def clean_image(self):
@@ -67,6 +75,7 @@ class NewsCategoryForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        allow_auto_slug(self)
         apply_tailwind(self)
 
 
@@ -82,6 +91,7 @@ class NewsPostForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        allow_auto_slug(self)
         apply_tailwind(self)
 
     def clean_image(self):
@@ -98,6 +108,7 @@ class GalleryCategoryForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        allow_auto_slug(self)
         apply_tailwind(self)
 
 

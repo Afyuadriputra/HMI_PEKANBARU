@@ -53,6 +53,8 @@ class NewsRequestPaymentForm(forms.ModelForm):
 
     def clean_payment_proof(self):
         file_obj = self.cleaned_data.get("payment_proof")
+        if not file_obj and not getattr(self.instance, "payment_proof", None):
+            raise forms.ValidationError("Bukti pembayaran wajib diupload.")
         validate_extension(file_obj, IMAGE_EXTENSIONS, "Bukti pembayaran harus jpg, jpeg, png, atau webp.")
         return file_obj
 

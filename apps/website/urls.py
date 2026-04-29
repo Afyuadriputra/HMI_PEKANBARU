@@ -6,8 +6,12 @@ app_name = "website"
 
 urlpatterns = [
     path("", views.home_view, name="home"),
-    path("dekstop.html", views.desktop_view, name="desktop"),
+    path("desktop.html", views.desktop_view, name="desktop"),
     path("mobile.html", views.mobile_view, name="mobile"),
+
+    # sementara kalau URL lama masih sering dibuka
+    path("dekstop.html", views.desktop_view, name="desktop_old"),
+
     path("admin/settings/", views.setting_list_view, name="setting_list"),
     path("admin/settings/create/", views.setting_create_view, name="setting_create"),
     path("admin/settings/<int:setting_id>/edit/", views.setting_update_view, name="setting_update"),
