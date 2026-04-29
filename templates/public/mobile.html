@@ -1,540 +1,669 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html class="light" lang="id">
+<html class="light scroll-smooth" lang="id">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#00450d",
-                        "primary-container": "#1b5e20",
-                        "on-primary": "#ffffff",
-                        "on-primary-container": "#90d689",
-                        "secondary": "#5f5e5e",
-                        "surface": "#f9f9f9",
-                        "surface-container-low": "#f3f3f3",
-                        "surface-container": "#eeeeee",
-                        "surface-container-high": "#e8e8e8",
-                        "surface-container-highest": "#e2e2e2",
-                        "tertiary": "#705d00",
-                        "tertiary-fixed": "#ffe16d",
-                        "on-tertiary-fixed": "#221b00",
-                        "on-tertiary-fixed-variant": "#544600",
-                        "outline": "#717a6d",
-                    },
-                    // UKURAN FONT DI-SCALE DOWN KHUSUS MOBILE
-                    fontSize: {
-                        "sz-1": ["32px", "40px"], // H1 diperkecil untuk HP
-                        "sz-2": ["24px", "32px"], // H2
-                        "sz-3": ["18px", "26px"], // H3
-                        "sz-4": ["14px", "20px"], // Body
-                    },
-                    fontFamily: {
-                        "sans": ["Inter", "sans-serif"],
-                    }
-                },
-            },
-        }
-    </script>
-    <style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-html { scroll-behavior: smooth; }
+  <title>{{ site_name|default:"SI-HMI Pekanbaru" }}</title>
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
-        
-        /* Hide scrollbar for horizontal carousels but keep functionality */
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,line-clamp,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#00450d",
+            "primary-container": "#1b5e20",
+            "on-primary": "#ffffff",
+            secondary: "#5f5e5e",
+            surface: "#f9f9f9",
+            "surface-container-low": "#f3f3f3",
+            "surface-container": "#eeeeee",
+            "surface-container-high": "#e8e8e8",
+            tertiary: "#705d00",
+            "tertiary-fixed": "#ffe16d",
+            "tertiary-fixed-dim": "#e8c84f",
+            "on-tertiary-fixed": "#221b00",
+            "on-tertiary-fixed-variant": "#544600",
+            outline: "#717a6d",
+          },
+          fontSize: {
+            "sz-1": ["32px", "40px"],
+            "sz-2": ["24px", "32px"],
+            "sz-3": ["18px", "26px"],
+            "sz-4": ["14px", "20px"],
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
 </head>
-<body class="bg-surface text-secondary pb-24 selection:bg-tertiary-fixed selection:text-on-tertiary-fixed">
 
-    <header class="fixed top-0 w-full z-50 bg-[#f9f9f9]/90 backdrop-blur-xl transition-all duration-300 shadow-sm border-b border-outline/10">
-        <div class="flex justify-between items-center px-6 py-3">
-            <a href="#" class="flex items-center gap-3">
-                <img src="{{ logo_url }}" alt="Logo HMI" class="h-10 w-auto object-contain" />
-                <span class="text-sz-3 font-bold text-primary tracking-tight">HMI Pekanbaru</span>
-            </a>
-            <button class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                <span class="material-symbols-outlined text-sz-3">notifications</span>
-            </button>
+<body class="bg-surface pb-24 text-secondary selection:bg-tertiary-fixed selection:text-on-tertiary-fixed">
+
+<header class="fixed top-0 z-50 w-full border-b border-outline/10 bg-[#f9f9f9]/90 shadow-sm backdrop-blur-xl">
+  <div class="flex items-center justify-between px-6 py-3">
+    <a href="{% url 'website:home' %}" class="flex items-center gap-3">
+      {% if logo_url %}
+        <img src="{{ logo_url }}" alt="{{ site_name|default:'SI-HMI Pekanbaru' }}" class="h-10 w-auto object-contain">
+      {% endif %}
+      <span class="text-sz-3 font-bold tracking-tight text-primary">
+        {{ site_name|default:"SI-HMI Pekanbaru" }}
+      </span>
+    </a>
+
+    {% if user.is_authenticated %}
+      <a href="{% url 'accounts:dashboard' %}" class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+        <span class="material-symbols-outlined text-sz-3">dashboard</span>
+      </a>
+    {% else %}
+      <a href="{% url 'accounts:login' %}" class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+        <span class="material-symbols-outlined text-sz-3">login</span>
+      </a>
+    {% endif %}
+  </div>
+</header>
+
+<nav class="fixed bottom-0 z-50 w-full border-t border-outline/10 bg-white/90 px-6 py-3 shadow-[0_-8px_32px_rgba(0,0,0,0.05)] backdrop-blur-2xl">
+  <div class="flex items-center justify-between">
+    <a href="#beranda" class="nav-item flex flex-col items-center gap-1 text-primary">
+      <span class="material-symbols-outlined nav-icon text-[28px]" data-weight="fill">home</span>
+      <span class="nav-text text-[10px] font-bold">Beranda</span>
+    </a>
+
+    <a href="#profil" class="nav-item flex flex-col items-center gap-1 text-secondary hover:text-primary">
+      <span class="material-symbols-outlined nav-icon text-[28px]">account_balance</span>
+      <span class="nav-text text-[10px] font-semibold">Profil</span>
+    </a>
+
+    <a href="#agenda" class="nav-item flex flex-col items-center gap-1 text-secondary hover:text-primary">
+      <span class="material-symbols-outlined nav-icon text-[28px]">event_note</span>
+      <span class="nav-text text-[10px] font-semibold">Agenda</span>
+    </a>
+
+    <a href="#berita" class="nav-item flex flex-col items-center gap-1 text-secondary hover:text-primary">
+      <span class="material-symbols-outlined nav-icon text-[28px]">article</span>
+      <span class="nav-text text-[10px] font-semibold">Berita</span>
+    </a>
+
+    <a href="#menu" class="nav-item flex flex-col items-center gap-1 text-secondary hover:text-primary">
+      <span class="material-symbols-outlined nav-icon text-[28px]">menu</span>
+      <span class="nav-text text-[10px] font-semibold">Menu</span>
+    </a>
+  </div>
+</nav>
+
+{% if messages %}
+  <div class="fixed left-4 right-4 top-20 z-[60] space-y-2">
+    {% for message in messages %}
+      <div class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-[12px] text-emerald-800 shadow">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<main class="pt-16">
+
+<section id="beranda" class="relative flex min-h-[85vh] flex-col justify-end overflow-hidden pb-12 pt-32">
+  <div class="absolute inset-0 z-0">
+    {% if hero_image_url %}
+      <img src="{{ hero_image_url }}" alt="{{ profile.name|default:'SI-HMI Pekanbaru' }}" class="h-full w-full object-cover">
+    {% else %}
+      <div class="h-full w-full bg-primary"></div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
+  </div>
+
+  <div class="relative z-10 px-6">
+    {% if profile.founded_year %}
+      <span class="mb-4 inline-block rounded-full bg-tertiary-fixed px-4 py-2 text-[12px] font-bold uppercase tracking-widest text-on-tertiary-fixed shadow-sm">
+        EST. {{ profile.founded_year }}
+      </span>
+    {% endif %}
+
+    <h1 class="mb-4 text-sz-1 font-bold leading-tight tracking-tight text-white drop-shadow-md">
+      {{ profile.name|default:site_name|default:"SI-HMI Pekanbaru" }}
+    </h1>
+
+    <p class="mb-8 max-w-[90%] text-sz-4 leading-relaxed text-white/80">
+      {{ profile.description|default:"Sistem Informasi HMI Pekanbaru." }}
+    </p>
+
+    <div class="flex flex-col gap-4">
+      <a href="{% url 'organization:profile' %}" class="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-sz-4 font-bold text-white shadow-xl hover:bg-primary-container">
+        Tentang Kami
+        <span class="material-symbols-outlined text-sz-3">arrow_forward</span>
+      </a>
+
+      <a href="{% url 'events:list' %}" class="w-full rounded-2xl border border-white/30 bg-white/10 py-4 text-center text-sz-4 font-bold text-white shadow-sm backdrop-blur-md">
+        Lihat Kegiatan
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="profil" class="bg-surface-container-low py-12">
+  <div class="px-6">
+    <div class="relative mb-10 aspect-square w-full overflow-hidden rounded-[32px] shadow-lg">
+      {% if profile_image_url %}
+        <img src="{{ profile_image_url }}" alt="{{ profile.name|default:'Profil organisasi' }}" class="h-full w-full object-cover">
+      {% else %}
+        <div class="flex h-full w-full items-center justify-center bg-white text-primary">
+          <span class="material-symbols-outlined text-[72px]">groups</span>
         </div>
-    </header>
+      {% endif %}
 
-<nav class="fixed bottom-0 w-full z-50 bg-white/90 backdrop-blur-2xl border-t border-outline/10 px-6 py-3 shadow-[0_-8px_32px_rgba(0,0,0,0.05)] pb-safe">
-        <div class="flex justify-between items-center">
-            <a href="#beranda" class="nav-item flex flex-col items-center gap-1 text-primary transition-colors duration-300">
-                <span class="material-symbols-outlined text-[28px] nav-icon" data-weight="fill">home</span>
-                <span class="text-[10px] font-bold nav-text">Beranda</span>
-            </a>
-            <a href="#profil" class="nav-item flex flex-col items-center gap-1 text-secondary hover:text-primary transition-colors duration-300">
-                <span class="material-symbols-outlined text-[28px] nav-icon">account_balance</span>
-                <span class="text-[10px] font-semibold nav-text">Profil</span>
-            </a>
-            <a href="#agenda" class="nav-item flex flex-col items-center gap-1 text-secondary hover:text-primary transition-colors duration-300">
-                <span class="material-symbols-outlined text-[28px] nav-icon">event_note</span>
-                <span class="text-[10px] font-semibold nav-text">Agenda</span>
-            </a>
-            <a href="#berita" class="nav-item flex flex-col items-center gap-1 text-secondary hover:text-primary transition-colors duration-300">
-                <span class="material-symbols-outlined text-[28px] nav-icon">article</span>
-                <span class="text-[10px] font-semibold nav-text">Berita</span>
-            </a>
-            <a href="#menu" class="nav-item flex flex-col items-center gap-1 text-secondary hover:text-primary transition-colors duration-300">
-                <span class="material-symbols-outlined text-[28px] nav-icon">menu</span>
-                <span class="text-[10px] font-semibold nav-text">Menu</span>
-            </a>
+      {% if organization_age %}
+        <div class="absolute bottom-4 right-4 flex h-28 w-28 flex-col justify-center rounded-2xl bg-tertiary-fixed p-4 shadow-xl">
+          <span class="mb-1 block text-sz-2 font-bold text-primary">{{ organization_age }}+</span>
+          <span class="text-[10px] font-bold leading-tight text-on-tertiary-fixed-variant">Tahun melahirkan pemimpin bangsa</span>
         </div>
-    </nav>
+      {% endif %}
+    </div>
 
-    <main class="pt-20"> 
-<section id="beranda" class="relative min-h-[85vh] flex flex-col justify-end pb-12 pt-32 overflow-hidden">
-            
-            <div class="absolute inset-0 z-0">
-                <img class="w-full h-full object-cover" src="{{ hero_image_url }}" alt="Pemandangan Kota Pekanbaru Riau"/>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
+    <h2 class="mb-6 text-sz-1 font-bold text-primary">Identitas Organisasi</h2>
+    <p class="mb-8 text-sz-4 leading-relaxed text-secondary">
+      {{ profile.history|default:profile.description }}
+    </p>
+
+    <a href="{% url 'organization:profile' %}" class="block rounded-2xl bg-white py-4 text-center text-sz-4 font-bold text-primary shadow-sm">
+      Lihat Profil Lengkap
+    </a>
+  </div>
+</section>
+
+<section class="relative overflow-hidden bg-surface py-12">
+  <div class="absolute right-0 top-0 h-[300px] w-[300px] rounded-full bg-primary/5 blur-3xl"></div>
+
+  <div class="relative z-10 mb-8 px-6 text-center">
+    <h2 class="mb-4 text-sz-1 font-bold text-primary">Fondasi Perjuangan</h2>
+    <div class="mx-auto h-1.5 w-16 rounded-full bg-tertiary"></div>
+  </div>
+
+  <div class="hide-scrollbar relative z-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-8">
+    <div class="flex min-w-[85vw] snap-center flex-col rounded-[24px] border border-white bg-white/60 p-6 shadow-sm backdrop-blur-xl">
+      <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <span class="material-symbols-outlined text-sz-2">visibility</span>
+      </div>
+      <h3 class="mb-3 text-sz-2 font-bold text-primary">Visi</h3>
+      <p class="text-sz-4 leading-relaxed text-secondary">
+        {{ profile.vision|default:"Visi organisasi belum tersedia." }}
+      </p>
+    </div>
+
+    <div class="flex min-w-[85vw] snap-center flex-col rounded-[24px] border border-white bg-white/60 p-6 shadow-sm backdrop-blur-xl">
+      <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <span class="material-symbols-outlined text-sz-2">assignment</span>
+      </div>
+      <h3 class="mb-3 text-sz-2 font-bold text-primary">Misi</h3>
+      <p class="text-sz-4 leading-relaxed text-secondary">
+        {{ profile.mission|default:"Misi organisasi belum tersedia." }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="relative overflow-hidden bg-surface-container-low py-12">
+  <div class="relative z-10 mb-8 px-6 text-center">
+    <h2 class="mb-2 text-sz-1 font-bold text-primary">Struktur Kepengurusan</h2>
+  </div>
+
+  <div class="hide-scrollbar relative z-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-8">
+    {% for member in management_cards %}
+      <a href="{% url 'organization:management' %}" class="group relative aspect-[4/5] min-w-[75vw] snap-center overflow-hidden rounded-[24px] shadow-md">
+        {% if member.image_url %}
+          <img src="{{ member.image_url }}" alt="{{ member.name }}" class="h-full w-full object-cover">
+        {% else %}
+          <div class="flex h-full w-full items-center justify-center bg-white text-primary">
+            <span class="material-symbols-outlined text-[64px]">person</span>
+          </div>
+        {% endif %}
+
+        <div class="absolute bottom-3 left-3 right-3 rounded-2xl border border-white bg-white/70 p-4 backdrop-blur-md">
+          <h3 class="mb-1 text-sz-3 font-bold text-primary">{{ member.name }}</h3>
+          <p class="text-sz-4 font-medium text-secondary">{{ member.position }}</p>
+        </div>
+      </a>
+    {% empty %}
+      <div class="min-w-[85vw] rounded-[24px] bg-white p-6 text-sz-4 text-secondary shadow-sm">
+        Data pengurus belum tersedia.
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="bg-surface py-12">
+  <div class="px-6">
+    <h2 class="mb-2 text-sz-1 font-bold text-primary">Program Strategis</h2>
+
+    <div class="mt-6 flex flex-col gap-4">
+      {% for program in program_cards %}
+        {% if forloop.first %}
+          {% if program.url %}
+            <a href="{{ program.url }}" class="relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-[24px] shadow-md">
+          {% else %}
+            <div class="relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-[24px] shadow-md">
+          {% endif %}
+
+            {% if program.image_url %}
+              <img src="{{ program.image_url }}" alt="{{ program.title }}" class="absolute inset-0 h-full w-full object-cover">
+            {% else %}
+              <div class="absolute inset-0 bg-primary"></div>
+            {% endif %}
+
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
+
+            <div class="relative z-10 p-6">
+              <span class="mb-3 inline-block rounded-lg bg-primary px-3 py-1 text-[12px] font-bold uppercase tracking-widest text-white">
+                Utama
+              </span>
+              <h3 class="mb-2 text-sz-2 font-bold text-white">{{ program.title }}</h3>
+              <p class="mb-4 line-clamp-2 text-sz-4 text-white/80">{{ program.description|default:"" }}</p>
+              <span class="block w-full rounded-xl bg-white py-3 text-center text-sz-4 font-bold text-primary">
+                Lihat Detail
+              </span>
             </div>
 
-            <div class="px-6 relative z-10">
-                <span class="inline-block px-4 py-2 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-[12px] font-bold tracking-widest uppercase mb-4 shadow-sm">
-                    EST. {{ profile.founded_year|default:"1947" }}
-                </span>
-                
-                <h1 class="text-sz-1 font-bold text-white mb-4 leading-tight tracking-tight drop-shadow-md">
-                    {{ profile.name|default:"Himpunan Mahasiswa Islam Pekanbaru" }}
-                </h1>
-                
-                <p class="text-sz-4 text-white/80 mb-8 leading-relaxed max-w-[90%]">
-                    {{ profile.description|default:"Wadah perjuangan intelektual, kepemimpinan, dan pengabdian kader muda Islam dalam mewujudkan masyarakat adil makmur." }}
-                </p>
-                
-                <div class="flex flex-col gap-4">
-                    <button class="bg-primary text-white text-sz-4 w-full py-4 rounded-2xl font-bold shadow-xl flex justify-center items-center gap-2 hover:bg-primary-container transition-all">
-                        Tentang Kami <span class="material-symbols-outlined text-sz-3">arrow_forward</span>
-                    </button>
-                    <button class="text-sz-4 text-white w-full py-4 rounded-2xl border border-white/30 font-bold bg-white/10 backdrop-blur-md shadow-sm">
-                        Lihat Kegiatan
-                    </button>
-                </div>
+          {% if program.url %}
+            </a>
+          {% else %}
             </div>
-            
-        </section>
+          {% endif %}
+        {% else %}
+          {% if program.url %}
+            <a href="{{ program.url }}" class="flex items-center gap-4 rounded-[24px] border border-outline/10 bg-white/60 p-5 shadow-sm backdrop-blur-md">
+          {% else %}
+            <div class="flex items-center gap-4 rounded-[24px] border border-outline/10 bg-white/60 p-5 shadow-sm backdrop-blur-md">
+          {% endif %}
 
-        <section id="profil" class="py-12 bg-surface-container-low">
-            <div class="px-6">
-                <div class="relative w-full aspect-square rounded-[32px] overflow-hidden shadow-lg mb-10">
-                    <img class="w-full h-full object-cover" src="{{ profile_image_url }}"/>
-                    <div class="absolute bottom-4 right-4 w-28 h-28 bg-tertiary-fixed rounded-2xl p-4 shadow-xl flex flex-col justify-center">
-                        <span class="block text-sz-2 font-bold text-primary mb-1">75+</span>
-                        <span class="text-[10px] font-bold text-on-tertiary-fixed-variant leading-tight">Tahun melahirkan pemimpin bangsa</span>
-                    </div>
-                </div>
-                
-                <h2 class="text-sz-1 font-bold text-primary mb-6">Identitas Organisasi</h2>
-                <p class="text-sz-4 text-secondary leading-relaxed mb-8">
-                    {{ profile.history|default:"Himpunan Mahasiswa Islam (HMI) Cabang Pekanbaru merupakan bagian integral dari perjuangan HMI di tingkat nasional. Berfokus pada pembinaan kepribadian kader yang memiliki kualitas insan cita." }}
-                </p>
-                <ul class="space-y-6">
-                    <li class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-sz-2 text-tertiary bg-tertiary/10 p-2 rounded-xl">school</span>
-                        <div>
-                            <h4 class="text-sz-3 font-bold text-primary mb-1">Intelektualitas</h4>
-                            <p class="text-sz-4 text-secondary">Mengedepankan kajian kritis dan dialog ilmiah.</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-sz-2 text-tertiary bg-tertiary/10 p-2 rounded-xl">groups</span>
-                        <div>
-                            <h4 class="text-sz-3 font-bold text-primary mb-1">Kepemimpinan</h4>
-                            <p class="text-sz-4 text-secondary">Menempa kader menjadi pemimpin masa depan.</p>
-                        </div>
-                    </li>
-                </ul>
+            <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-surface text-primary">
+              <span class="material-symbols-outlined text-sz-2">menu_book</span>
             </div>
-        </section>
-
-        <section class="py-12 bg-surface relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="px-6 mb-8 text-center relative z-10">
-                <h2 class="text-sz-1 font-bold text-primary mb-4">Fondasi Perjuangan</h2>
-                <div class="h-1.5 w-16 bg-tertiary mx-auto rounded-full"></div>
+            <div>
+              <h3 class="mb-1 text-sz-3 font-bold text-primary">{{ program.title }}</h3>
+              <p class="line-clamp-1 text-[12px] text-secondary">{{ program.description|default:"" }}</p>
             </div>
-            
-            <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 px-6 pb-8 relative z-10">
-                
-                <div class="min-w-[85vw] snap-center bg-white/60 backdrop-blur-xl border border-white p-6 rounded-[24px] shadow-sm flex flex-col">
-                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary">
-                        <span class="material-symbols-outlined text-sz-2" data-weight="fill">visibility</span>
-                    </div>
-                    <h3 class="text-sz-2 font-bold text-primary mb-3">Visi</h3>
-                    <p class="text-sz-4 text-secondary leading-relaxed">{{ profile.vision|default:"Terbinanya insan akademis, pencipta, pengabdi yang bernafaskan Islam, dan bertangung jawab atas terwujudnya masyarakat adil makmur." }}</p>
-                </div>
 
-                <div class="min-w-[85vw] snap-center bg-white/60 backdrop-blur-xl border border-white p-6 rounded-[24px] shadow-sm flex flex-col">
-                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary">
-                        <span class="material-symbols-outlined text-sz-2" data-weight="fill">assignment</span>
-                    </div>
-                    <h3 class="text-sz-2 font-bold text-primary mb-3">Misi</h3>
-                    <p class="text-sz-4 text-secondary leading-relaxed">{{ profile.mission|default:"Melaksanakan perkaderan yang berkualitas, mengembangkan potensi intelektual mahasiswa, dan aktif dalam pengabdian." }}</p>
-                </div>
-
-                <div class="min-w-[85vw] snap-center bg-white/60 backdrop-blur-xl border border-white p-6 rounded-[24px] shadow-sm flex flex-col">
-                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary">
-                        <span class="material-symbols-outlined text-sz-2" data-weight="fill">stars</span>
-                    </div>
-                    <h3 class="text-sz-2 font-bold text-primary mb-3">Nilai Utama</h3>
-                    <p class="text-sz-4 text-secondary leading-relaxed">Iman, Ilmu, dan Amal sebagai pilar utama dalam setiap langkah perjuangan organisasi untuk agama dan bangsa.</p>
-                </div>
-
+          {% if program.url %}
+            </a>
+          {% else %}
             </div>
-        </section>
+          {% endif %}
+        {% endif %}
+      {% empty %}
+        <div class="rounded-[24px] bg-white p-6 text-sz-4 text-secondary shadow-sm">
+          Belum ada program.
+        </div>
+      {% endfor %}
+    </div>
 
-        <section class="py-12 bg-surface-container-low relative overflow-hidden">
-            <div class="px-6 mb-8 text-center relative z-10">
-                <h2 class="text-sz-1 font-bold text-primary mb-2">Struktur Kepengurusan</h2>
+    <a href="{% url 'programs:list' %}" class="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary/5 py-4 text-sz-4 font-bold text-primary">
+      Semua Program
+      <span class="material-symbols-outlined text-sz-3">arrow_forward</span>
+    </a>
+  </div>
+</section>
+
+<section id="berita" class="bg-surface-container-low py-12">
+  <div class="px-6">
+    <div class="mb-8 flex items-end justify-between">
+      <h2 class="text-sz-1 font-bold text-primary">Warta Organisasi</h2>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      {% for news in news_cards %}
+        {% if news.url %}
+          <a href="{{ news.url }}" class="flex items-center gap-4 rounded-[24px] bg-white p-3 shadow-sm">
+        {% else %}
+          <div class="flex items-center gap-4 rounded-[24px] bg-white p-3 shadow-sm">
+        {% endif %}
+
+          <div class="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-[16px]">
+            {% if news.category %}
+              <span class="absolute left-1 top-1 z-10 rounded bg-white/80 px-2 py-0.5 text-[8px] font-bold text-tertiary backdrop-blur">
+                {{ news.category }}
+              </span>
+            {% endif %}
+
+            {% if news.image_url %}
+              <img src="{{ news.image_url }}" alt="{{ news.title }}" class="h-full w-full object-cover">
+            {% else %}
+              <div class="flex h-full w-full items-center justify-center bg-surface text-primary">
+                <span class="material-symbols-outlined text-[32px]">article</span>
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="flex flex-col py-1">
+            <span class="mb-1 text-[12px] font-medium text-secondary">{{ news.date_label }}</span>
+            <h3 class="line-clamp-2 text-sz-4 font-bold leading-snug text-primary">{{ news.title }}</h3>
+          </div>
+
+        {% if news.url %}
+          </a>
+        {% else %}
+          </div>
+        {% endif %}
+      {% empty %}
+        <div class="rounded-[24px] bg-white p-6 text-sz-4 text-secondary shadow-sm">
+          Belum ada berita.
+        </div>
+      {% endfor %}
+    </div>
+
+    <a href="{% url 'news:list' %}" class="mt-6 block w-full rounded-2xl border border-outline/20 bg-white py-4 text-center text-sz-4 font-bold text-primary shadow-sm">
+      Indeks Berita
+    </a>
+  </div>
+</section>
+
+<section id="agenda" class="bg-surface py-12">
+  <div class="px-6">
+    <h2 class="mb-6 text-sz-1 font-bold text-primary">Agenda Mendatang</h2>
+
+    {% if event_main %}
+      {% if event_main.url %}
+        <a href="{{ event_main.url }}" class="relative mb-8 flex aspect-[4/3] items-end overflow-hidden rounded-[24px] shadow-md">
+      {% else %}
+        <div class="relative mb-8 flex aspect-[4/3] items-end overflow-hidden rounded-[24px] shadow-md">
+      {% endif %}
+
+        {% if event_main.image_url %}
+          <img src="{{ event_main.image_url }}" alt="{{ event_main.title }}" class="absolute inset-0 h-full w-full object-cover">
+        {% else %}
+          <div class="absolute inset-0 bg-primary"></div>
+        {% endif %}
+
+        <div class="relative m-4 w-full rounded-2xl border border-white/20 bg-black/40 p-4 backdrop-blur-md">
+          <span class="mb-2 inline-block rounded bg-tertiary px-2 py-1 text-[10px] font-bold tracking-widest text-white">
+            UTAMA
+          </span>
+          <h3 class="mb-2 text-sz-3 font-bold leading-tight text-white">{{ event_main.title }}</h3>
+
+          <div class="flex flex-col gap-1">
+            <span class="flex items-center gap-2 text-[12px] text-white">
+              <span class="material-symbols-outlined text-[16px]">calendar_today</span>
+              {{ event_main.date_label }}
+            </span>
+            <span class="flex items-center gap-2 text-[12px] text-white">
+              <span class="material-symbols-outlined text-[16px]">location_on</span>
+              {{ event_main.location }}
+            </span>
+          </div>
+        </div>
+
+      {% if event_main.url %}
+        </a>
+      {% else %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="mb-8 rounded-[24px] bg-white p-6 text-sz-4 text-secondary shadow-sm">
+        Belum ada agenda utama.
+      </div>
+    {% endif %}
+
+    <div class="rounded-[24px] border border-outline/10 bg-white p-6 shadow-sm">
+      <h4 class="mb-6 border-b border-outline/10 pb-4 text-sz-3 font-bold text-primary">Timeline Kegiatan</h4>
+
+      <div class="space-y-4">
+        {% for event in event_timeline %}
+          {% if event.url %}
+            <a href="{{ event.url }}" class="flex items-center gap-4 border-b border-outline/5 pb-4 last:border-b-0 last:pb-0">
+          {% else %}
+            <div class="flex items-center gap-4 border-b border-outline/5 pb-4 last:border-b-0 last:pb-0">
+          {% endif %}
+
+            <div class="min-w-[50px] rounded-xl bg-surface py-2 text-center">
+              <span class="mb-1 block text-sz-3 font-bold leading-none text-tertiary">{{ event.day }}</span>
+              <span class="text-[10px] font-bold uppercase text-secondary">{{ event.month }}</span>
             </div>
-            
-            <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 px-6 pb-8 relative z-10">
-                
-                <div class="min-w-[75vw] snap-center group relative aspect-[4/5] rounded-[24px] overflow-hidden shadow-md">
-                    <img class="w-full h-full object-cover" src="{{ management_cards.0.image_url }}"/>
-                    <div class="absolute bottom-3 left-3 right-3 bg-white/70 backdrop-blur-md border border-white p-4 rounded-2xl">
-                        <h3 class="text-sz-3 font-bold text-primary mb-1">{{ management_cards.0.name }}</h3>
-                        <p class="text-sz-4 font-medium text-secondary">{{ management_cards.0.position }}</p>
-                    </div>
-                </div>
-
-                <div class="min-w-[75vw] snap-center group relative aspect-[4/5] rounded-[24px] overflow-hidden shadow-md">
-                    <img class="w-full h-full object-cover" src="{{ management_cards.1.image_url }}"/>
-                    <div class="absolute bottom-3 left-3 right-3 bg-white/70 backdrop-blur-md border border-white p-4 rounded-2xl">
-                        <h3 class="text-sz-3 font-bold text-primary mb-1">{{ management_cards.1.name }}</h3>
-                        <p class="text-sz-4 font-medium text-secondary">{{ management_cards.1.position }}</p>
-                    </div>
-                </div>
-
-                <div class="min-w-[75vw] snap-center group relative aspect-[4/5] rounded-[24px] overflow-hidden shadow-md">
-                    <img class="w-full h-full object-cover" src="{{ management_cards.2.image_url }}"/>
-                    <div class="absolute bottom-3 left-3 right-3 bg-white/70 backdrop-blur-md border border-white p-4 rounded-2xl">
-                        <h3 class="text-sz-3 font-bold text-primary mb-1">{{ management_cards.2.name }}</h3>
-                        <p class="text-sz-4 font-medium text-secondary">{{ management_cards.2.position }}</p>
-                    </div>
-                </div>
-
+            <div>
+              <h5 class="mb-1 text-sz-4 font-bold text-primary">{{ event.title }}</h5>
+              <p class="text-[12px] text-secondary">{{ event.location }}</p>
             </div>
-        </section>
 
-        <section class="py-12 bg-surface">
-            <div class="px-6 relative z-10">
-                <h2 class="text-sz-1 font-bold text-primary mb-2">Program Strategis</h2>
-                <p class="text-sz-4 text-secondary mb-8">Inisiatif kami membangun kapasitas intelektual mahasiswa.</p>
-                
-                <div class="flex flex-col gap-4">
-                    <div class="relative rounded-[24px] overflow-hidden shadow-md aspect-[4/5] flex flex-col justify-end">
-                        <img class="absolute inset-0 w-full h-full object-cover" src="{{ program_cards.0.image_url }}" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
-                        <div class="relative z-10 p-6">
-                            <span class="inline-block bg-primary text-white px-3 py-1 rounded-lg text-[12px] font-bold tracking-widest uppercase mb-3">UTAMA</span>
-                            <h3 class="text-sz-2 font-bold text-white mb-2">{{ program_cards.0.title }}</h3>
-                            <p class="text-sz-4 text-white/80 mb-4 line-clamp-2">{{ program_cards.0.description }}</p>
-                            <button class="bg-white text-primary text-sz-4 w-full py-3 rounded-xl font-bold">Info Pendaftaran</button>
-                        </div>
-                    </div>
-
-                    <div class="bg-white/60 backdrop-blur-md border border-outline/10 p-5 rounded-[24px] flex items-center gap-4 shadow-sm">
-                        <div class="w-14 h-14 bg-surface rounded-2xl flex-shrink-0 flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined text-sz-2">menu_book</span>
-                        </div>
-                        <div>
-                            <h3 class="text-sz-3 font-bold text-primary mb-1">{{ program_cards.1.title }}</h3>
-                            <p class="text-sz-4 text-secondary text-[12px] line-clamp-1">{{ program_cards.1.description }}</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white/60 backdrop-blur-md border border-outline/10 p-5 rounded-[24px] flex items-center gap-4 shadow-sm">
-                        <div class="w-14 h-14 bg-surface rounded-2xl flex-shrink-0 flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined text-sz-2">volunteer_activism</span>
-                        </div>
-                        <div>
-                            <h3 class="text-sz-3 font-bold text-primary mb-1">{{ program_cards.2.title }}</h3>
-                            <p class="text-sz-4 text-secondary text-[12px] line-clamp-1">{{ program_cards.2.description }}</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <button class="mt-6 text-sz-4 text-primary font-bold w-full py-4 bg-primary/5 rounded-2xl flex items-center justify-center gap-2">
-                    Semua Program <span class="material-symbols-outlined text-sz-3">arrow_forward</span>
-                </button>
+          {% if event.url %}
+            </a>
+          {% else %}
             </div>
-        </section>
+          {% endif %}
+        {% empty %}
+          <p class="text-sz-4 text-secondary">Belum ada timeline kegiatan.</p>
+        {% endfor %}
+      </div>
 
-        <section id="berita" class="py-12 bg-surface-container-low">
-            <div class="px-6">
-                <div class="flex justify-between items-end mb-8">
-                    <h2 class="text-sz-1 font-bold text-primary">Warta Organisasi</h2>
-                </div>
+      <a href="{% url 'events:list' %}" class="mt-6 block w-full rounded-xl bg-surface py-3 text-center text-sz-4 font-bold text-primary">
+        Seluruh Agenda
+      </a>
+    </div>
+  </div>
+</section>
 
-                <div class="flex flex-col gap-4">
-                    
-                    <article class="bg-white rounded-[24px] p-3 flex gap-4 shadow-sm items-center">
-                        <div class="w-24 h-24 rounded-[16px] flex-shrink-0 overflow-hidden relative">
-                            <span class="absolute top-1 left-1 bg-white/80 backdrop-blur px-2 py-0.5 rounded text-[8px] font-bold text-tertiary">{{ news_cards.0.category }}</span>
-                            <img class="w-full h-full object-cover" src="{{ news_cards.0.image_url }}"/>
-                        </div>
-                        <div class="flex flex-col py-1">
-                            <span class="text-[12px] text-secondary font-medium mb-1">{{ news_cards.0.date_label }}</span>
-                            <h3 class="text-sz-4 font-bold text-primary leading-snug line-clamp-2 mb-1">{{ news_cards.0.title }}</h3>
-                        </div>
-                    </article>
+<section class="bg-surface-container-low py-12">
+  <div class="px-6">
+    <h2 class="mb-6 text-sz-1 font-bold text-primary">Jejak Langkah</h2>
 
-                    <article class="bg-white rounded-[24px] p-3 flex gap-4 shadow-sm items-center">
-                        <div class="w-24 h-24 rounded-[16px] flex-shrink-0 overflow-hidden relative">
-                            <span class="absolute top-1 left-1 bg-white/80 backdrop-blur px-2 py-0.5 rounded text-[8px] font-bold text-tertiary">{{ news_cards.1.category }}</span>
-                            <img class="w-full h-full object-cover" src="{{ news_cards.1.image_url }}"/>
-                        </div>
-                        <div class="flex flex-col py-1">
-                            <span class="text-[12px] text-secondary font-medium mb-1">{{ news_cards.1.date_label }}</span>
-                            <h3 class="text-sz-4 font-bold text-primary leading-snug line-clamp-2 mb-1">{{ news_cards.1.title }}</h3>
-                        </div>
-                    </article>
-
-                    <article class="bg-white rounded-[24px] p-3 flex gap-4 shadow-sm items-center">
-                        <div class="w-24 h-24 rounded-[16px] flex-shrink-0 overflow-hidden relative">
-                            <span class="absolute top-1 left-1 bg-white/80 backdrop-blur px-2 py-0.5 rounded text-[8px] font-bold text-tertiary">{{ news_cards.2.category }}</span>
-                            <img class="w-full h-full object-cover" src="{{ news_cards.2.image_url }}"/>
-                        </div>
-                        <div class="flex flex-col py-1">
-                            <span class="text-[12px] text-secondary font-medium mb-1">{{ news_cards.2.date_label }}</span>
-                            <h3 class="text-sz-4 font-bold text-primary leading-snug line-clamp-2 mb-1">{{ news_cards.2.title }}</h3>
-                        </div>
-                    </article>
-
-                </div>
-                
-                <button class="mt-6 bg-white border border-outline/20 text-sz-4 text-primary w-full py-4 rounded-2xl font-bold shadow-sm">
-                    Indeks Berita
-                </button>
+    <div class="grid grid-cols-2 gap-4">
+      {% for image in gallery_cards %}
+        <a href="{% url 'gallery:list' %}" class="aspect-square overflow-hidden rounded-[20px] bg-white shadow-sm">
+          {% if image.image_url %}
+            <img src="{{ image.image_url }}" alt="{{ image.alt|default:'Galeri HMI Pekanbaru' }}" class="h-full w-full object-cover">
+          {% else %}
+            <div class="flex h-full w-full items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[40px]">image</span>
             </div>
-        </section>
+          {% endif %}
+        </a>
+      {% empty %}
+        <div class="col-span-2 rounded-[24px] bg-white p-6 text-sz-4 text-secondary shadow-sm">
+          Belum ada foto galeri.
+        </div>
+      {% endfor %}
+    </div>
 
-        <section id="agenda" class="py-12 bg-surface">
-            <div class="px-6">
-                <h2 class="text-sz-1 font-bold text-primary mb-6">Agenda Mendatang</h2>
-                
-                <div class="relative rounded-[24px] overflow-hidden aspect-[4/3] flex items-end shadow-md mb-8">
-                    <img class="absolute inset-0 w-full h-full object-cover" src="{{ event_main.image_url }}"/>
-                    <div class="relative w-full m-4 p-4 bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl">
-                        <span class="bg-tertiary text-white px-2 py-1 rounded text-[10px] font-bold tracking-widest mb-2 inline-block">UTAMA</span>
-                        <h3 class="text-sz-3 font-bold text-white mb-2 leading-tight">{{ event_main.title }}</h3>
-                        <div class="flex flex-col gap-1">
-                            <span class="text-[12px] text-white flex items-center gap-2">
-                                <span class="material-symbols-outlined text-[16px]">calendar_today</span> {{ event_main.date_label }}
-                            </span>
-                            <span class="text-[12px] text-white flex items-center gap-2">
-                                <span class="material-symbols-outlined text-[16px]">location_on</span> {{ event_main.location }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
+    <a href="{% url 'gallery:list' %}" class="mt-8 block w-full rounded-2xl border border-outline/20 bg-white py-4 text-center text-sz-4 font-bold text-primary shadow-sm">
+      Lihat Semua Foto
+    </a>
+  </div>
+</section>
 
-                <div class="bg-white border border-outline/10 rounded-[24px] p-6 shadow-sm">
-                    <h4 class="text-sz-3 font-bold text-primary mb-6 border-b border-outline/10 pb-4">Timeline Kegiatan</h4>
-                    <div class="space-y-4">
-                        <div class="flex gap-4 items-center border-b border-outline/5 pb-4">
-                            <div class="text-center min-w-[50px] bg-surface rounded-xl py-2">
-                                <span class="block text-sz-3 font-bold text-tertiary leading-none mb-1">{{ event_timeline.0.day }}</span>
-                                <span class="text-[10px] font-bold text-secondary uppercase">{{ event_timeline.0.month }}</span>
-                            </div>
-                            <div>
-                                <h5 class="text-sz-4 font-bold text-primary mb-1">{{ event_timeline.0.title }}</h5>
-                                <p class="text-[12px] text-secondary">{{ event_timeline.0.location }}</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 items-center">
-                            <div class="text-center min-w-[50px] bg-surface rounded-xl py-2">
-                                <span class="block text-sz-3 font-bold text-tertiary leading-none mb-1">{{ event_timeline.1.day }}</span>
-                                <span class="text-[10px] font-bold text-secondary uppercase">{{ event_timeline.1.month }}</span>
-                            </div>
-                            <div>
-                                <h5 class="text-sz-4 font-bold text-primary mb-1">{{ event_timeline.1.title }}</h5>
-                                <p class="text-[12px] text-secondary">{{ event_timeline.1.location }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="mt-6 w-full py-3 bg-surface rounded-xl font-bold text-sz-4 text-primary">Seluruh Agenda</button>
-                </div>
-            </div>
-        </section>
+<section class="relative overflow-hidden bg-primary py-12">
+  <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
 
-        <section class="py-12 bg-surface-container-low">
-            <div class="px-6">
-                <h2 class="text-sz-1 font-bold text-primary mb-6">Jejak Langkah</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="aspect-square rounded-[20px] overflow-hidden shadow-sm">
-                        <img class="w-full h-full object-cover" src="{{ gallery_cards.0.image_url }}"/>
-                    </div>
-                    <div class="aspect-square rounded-[20px] overflow-hidden shadow-sm">
-                        <img class="w-full h-full object-cover" src="{{ gallery_cards.1.image_url }}"/>
-                    </div>
-                    <div class="aspect-square rounded-[20px] overflow-hidden shadow-sm">
-                        <img class="w-full h-full object-cover" src="{{ gallery_cards.2.image_url }}"/>
-                    </div>
-                    <div class="aspect-square rounded-[20px] overflow-hidden shadow-sm">
-                        <img class="w-full h-full object-cover" src="{{ gallery_cards.3.image_url }}"/>
-                    </div>
-                </div>
-                <button class="mt-8 text-sz-4 text-primary w-full py-4 bg-white rounded-2xl border border-outline/20 font-bold shadow-sm">
-                    Lihat Semua Foto
-                </button>
-            </div>
-        </section>
+  <div class="relative z-10 px-6 text-center text-white">
+    {% if primary_registration %}
+      <h2 class="mb-4 text-sz-1 font-bold leading-tight tracking-tight">{{ primary_registration.title }}</h2>
+      <p class="mb-8 text-sz-4 font-light leading-relaxed opacity-90">{{ primary_registration.description }}</p>
 
-        <section class="py-12 bg-primary relative overflow-hidden">
-            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
-            <div class="px-6 relative z-10 text-center text-on-primary">
-                <h2 class="text-sz-1 font-bold mb-4 leading-tight tracking-tight">Siap Menjadi Bagian dari Perubahan?</h2>
-                <p class="text-sz-4 opacity-90 mb-8 font-light leading-relaxed">Mari berkolaborasi membangun masa depan Indonesia yang lebih baik dan bermartabat.</p>
-                <div class="flex flex-col gap-4">
-                    <button class="bg-tertiary-fixed text-on-tertiary-fixed text-sz-4 w-full py-4 rounded-2xl font-bold shadow-xl flex justify-center items-center gap-2">
-                        Daftar Jadi Kader <span class="material-symbols-outlined text-sz-4">how_to_reg</span>
-                    </button>
-                    <button class="bg-black/20 text-white border border-white/30 text-sz-4 w-full py-4 rounded-2xl font-bold">
-                        Hubungi Sekretariat
-                    </button>
-                </div>
-            </div>
-        </section>
+      <div class="flex flex-col gap-4">
+        {% if primary_registration.google_form_url %}
+          <a href="{{ primary_registration.google_form_url }}" class="flex w-full items-center justify-center gap-2 rounded-2xl bg-tertiary-fixed py-4 text-sz-4 font-bold text-on-tertiary-fixed shadow-xl">
+            {{ primary_registration.title }}
+            <span class="material-symbols-outlined text-sz-4">how_to_reg</span>
+          </a>
+        {% endif %}
 
-        <footer id="menu" class="bg-surface-container-high py-12 px-6 border-t border-outline/10">
-            <div class="flex flex-col gap-8">
-                
-                <div class="flex flex-col items-center text-center">
-                    <img src="{{ logo_url }}" alt="Logo" class="h-16 mb-4" />
-                    <span class="text-sz-2 font-bold text-primary tracking-tight mb-2">HMI Pekanbaru</span>
-                    <p class="text-[12px] text-secondary leading-relaxed">
-                        Organisasi mahasiswa Islam tertua dan terbesar di Indonesia. Berkomitmen melahirkan insan cita.
-                    </p>
-                </div>
+        <a href="{% url 'registration:list' %}" class="w-full rounded-2xl border border-white/30 bg-black/20 py-4 text-sz-4 font-bold text-white">
+          Lihat Pendaftaran
+        </a>
+      </div>
+    {% else %}
+      <h2 class="mb-4 text-sz-1 font-bold">Pendaftaran</h2>
+      <a href="{% url 'registration:list' %}" class="block w-full rounded-2xl bg-tertiary-fixed py-4 text-sz-4 font-bold text-on-tertiary-fixed">
+        Lihat Pendaftaran
+      </a>
+    {% endif %}
+  </div>
+</section>
 
-                <div class="flex justify-center gap-4">
-                    <a href="#" class="w-10 h-10 bg-surface rounded-full flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-[20px]">photo_camera</span></a>
-                    <a href="#" class="w-10 h-10 bg-surface rounded-full flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-[20px]">play_arrow</span></a>
-                    <a href="#" class="w-10 h-10 bg-surface rounded-full flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-[20px]">mail</span></a>
-                </div>
+<footer id="menu" class="border-t border-outline/10 bg-surface-container-high px-6 py-12">
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col items-center text-center">
+      {% if logo_url %}
+        <img src="{{ logo_url }}" alt="{{ site_name|default:'SI-HMI Pekanbaru' }}" class="mb-4 h-16">
+      {% endif %}
 
-                <div class="bg-white rounded-[24px] p-6 shadow-sm">
-                    <h4 class="text-sz-4 font-bold text-primary mb-4 text-center">Hubungi Kami</h4>
-                    <ul class="space-y-4 text-[12px] text-secondary">
-                        <li class="flex items-start gap-3">
-                            <span class="material-symbols-outlined text-[16px] text-tertiary mt-0.5">location_on</span>
-                            <span>{{ profile.address|default:"Jl. Melayu No. 12, Pekanbaru, Riau" }}</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-[16px] text-tertiary">call</span>
-                            <span>{{ profile.phone|default:"(0761) 123 4567" }}</span>
-                        </li>
-                    </ul>
-                </div>
+      <span class="mb-2 text-sz-2 font-bold tracking-tight text-primary">
+        {{ site_name|default:"SI-HMI Pekanbaru" }}
+      </span>
 
-                <div class="text-center pt-8 border-t border-outline/10">
-                    <p class="text-[10px] font-medium text-secondary">© 2026 HMI Cabang Pekanbaru. Yakusa.</p>
-                </div>
+      <p class="text-[12px] leading-relaxed text-secondary">
+        {{ profile.description }}
+      </p>
+    </div>
 
-            </div>
-        </footer>
+    <div class="grid grid-cols-2 gap-3">
+      <a href="{% url 'organization:profile' %}" class="rounded-2xl bg-white px-4 py-4 text-center text-[12px] font-bold text-primary shadow-sm">Profil</a>
+      <a href="{% url 'organization:management' %}" class="rounded-2xl bg-white px-4 py-4 text-center text-[12px] font-bold text-primary shadow-sm">Pengurus</a>
+      <a href="{% url 'programs:list' %}" class="rounded-2xl bg-white px-4 py-4 text-center text-[12px] font-bold text-primary shadow-sm">Program</a>
+      <a href="{% url 'news:list' %}" class="rounded-2xl bg-white px-4 py-4 text-center text-[12px] font-bold text-primary shadow-sm">Berita</a>
+      <a href="{% url 'events:list' %}" class="rounded-2xl bg-white px-4 py-4 text-center text-[12px] font-bold text-primary shadow-sm">Agenda</a>
+      <a href="{% url 'gallery:list' %}" class="rounded-2xl bg-white px-4 py-4 text-center text-[12px] font-bold text-primary shadow-sm">Galeri</a>
+      <a href="{% url 'registration:list' %}" class="rounded-2xl bg-white px-4 py-4 text-center text-[12px] font-bold text-primary shadow-sm">Pendaftaran</a>
+      <a href="{% url 'news_request:create' %}" class="rounded-2xl bg-white px-4 py-4 text-center text-[12px] font-bold text-primary shadow-sm">Request Berita</a>
+    </div>
 
-    </main>
+    <div class="rounded-[24px] bg-white p-6 shadow-sm">
+      <h4 class="mb-4 text-center text-sz-4 font-bold text-primary">Hubungi Kami</h4>
+
+      <ul class="space-y-4 text-[12px] text-secondary">
+        {% if profile.address %}
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined mt-0.5 text-[16px] text-tertiary">location_on</span>
+            <span>{{ profile.address|linebreaksbr }}</span>
+          </li>
+        {% endif %}
+
+        {% if profile.phone %}
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[16px] text-tertiary">call</span>
+            <a href="tel:{{ contact_phone_href|default:profile.phone }}">{{ profile.phone }}</a>
+          </li>
+        {% endif %}
+
+        {% if profile.email %}
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[16px] text-tertiary">mail</span>
+            <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="border-t border-outline/10 pt-8 text-center">
+      <p class="text-[10px] font-medium text-secondary">
+        © 2026 {{ profile.name|default:site_name|default:"SI-HMI Pekanbaru" }}
+      </p>
+    </div>
+  </div>
+</footer>
+
+</main>
 
 <script>
-        (function() {
-            const desktopMedia = window.matchMedia("(min-width: 768px)");
+  (function () {
+    const desktopMedia = window.matchMedia("(min-width: 768px)");
 
-            function syncResponsivePage() {
-                if (desktopMedia.matches) {
-                    window.location.replace("{% url 'website:desktop' %}");
-                }
-            }
+    function syncResponsivePage() {
+      if (desktopMedia.matches) {
+        window.location.replace("{% url 'website:desktop' %}");
+      }
+    }
 
-            if (desktopMedia.addEventListener) {
-                desktopMedia.addEventListener("change", syncResponsivePage);
-            } else {
-                desktopMedia.addListener(syncResponsivePage);
-            }
+    if (desktopMedia.addEventListener) {
+      desktopMedia.addEventListener("change", syncResponsivePage);
+    } else {
+      desktopMedia.addListener(syncResponsivePage);
+    }
 
-            syncResponsivePage();
-        })();
+    syncResponsivePage();
+  })();
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const navItems = document.querySelectorAll('.nav-item');
-            
-            // Fungsi untuk mengatur tampilan menu yang sedang aktif
-            function setActiveNav(targetId) {
-                navItems.forEach(item => {
-                    const icon = item.querySelector('.nav-icon');
-                    const text = item.querySelector('.nav-text');
-                    
-                    if (item.getAttribute('href') === `#${targetId}`) {
-                        // State Aktif
-                        item.classList.remove('text-secondary');
-                        item.classList.add('text-primary');
-                        icon.setAttribute('data-weight', 'fill');
-                        text.classList.remove('font-semibold');
-                        text.classList.add('font-bold');
-                    } else {
-                        // State Tidak Aktif
-                        item.classList.remove('text-primary');
-                        item.classList.add('text-secondary');
-                        icon.removeAttribute('data-weight');
-                        text.classList.remove('font-bold');
-                        text.classList.add('font-semibold');
-                    }
-                });
-            }
+  document.addEventListener("DOMContentLoaded", function () {
+    const navItems = document.querySelectorAll(".nav-item");
 
-            // Deteksi scroll menggunakan IntersectionObserver (Otomatis nyala saat di-scroll)
-            // Pilih semua element yang memiliki id (beranda, profil, dll)
-            const sections = document.querySelectorAll('section[id], footer[id]');
-            
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.3 // Memicu perubahan jika 30% area section terlihat di layar
-            };
+    function setActiveNav(targetId) {
+      navItems.forEach(function (item) {
+        const icon = item.querySelector(".nav-icon");
+        const text = item.querySelector(".nav-text");
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setActiveNav(entry.target.id);
-                    }
-                });
-            }, observerOptions);
+        if (item.getAttribute("href") === "#" + targetId) {
+          item.classList.remove("text-secondary");
+          item.classList.add("text-primary");
+          icon.setAttribute("data-weight", "fill");
+          text.classList.remove("font-semibold");
+          text.classList.add("font-bold");
+        } else {
+          item.classList.remove("text-primary");
+          item.classList.add("text-secondary");
+          icon.removeAttribute("data-weight");
+          text.classList.remove("font-bold");
+          text.classList.add("font-semibold");
+        }
+      });
+    }
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+    const sections = document.querySelectorAll("section[id], footer[id]");
 
-            // Beri feedback visual instan saat tombol diklik (sebelum layar selesai meluncur)
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const targetId = this.getAttribute('href').substring(1);
-                    setActiveNav(targetId);
-                });
-            });
-        });
-    </script>
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          setActiveNav(entry.target.id);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3
+    });
+
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
+
+    navItems.forEach(function (item) {
+      item.addEventListener("click", function () {
+        const targetId = this.getAttribute("href").substring(1);
+        setActiveNav(targetId);
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
