@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mb-4 flex items-center justify-between"><h1 class="text-xl font-semibold">Kader</h1><a class="rounded bg-green-700 px-3 py-2 text-sm text-white" href="{% url 'cadre:cadre_create' %}">Tambah</a></div>
+<div class="rounded border bg-white">{% for item in items %}<div class="flex justify-between border-b p-3 text-sm"><span>{{ item.full_name }} - {{ item.commissariat }}</span><a class="text-green-700" href="{% url 'cadre:cadre_update' item.id %}">Edit</a></div>{% empty %}<p class="p-3 text-sm">Belum ada data.</p>{% endfor %}</div>
+{% endblock %}

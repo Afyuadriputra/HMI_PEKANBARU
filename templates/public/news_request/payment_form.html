@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="rounded border bg-white p-6">
+  <h1 class="mb-2 text-xl font-semibold">Upload Bukti Pembayaran</h1>
+  <p class="mb-4 text-sm text-slate-600">{{ news_request.title }} - Rp{{ news_request.price }}</p>
+  <form method="post" enctype="multipart/form-data" class="space-y-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="rounded bg-green-700 px-4 py-2 text-sm text-white">Upload</button>
+  </form>
+</section>
+{% endblock %}

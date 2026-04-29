@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4 text-2xl font-semibold">Ketua Umum dari Masa ke Masa</h1>
+<div class="grid gap-4 md:grid-cols-3">{% for item in chairmen %}<div class="rounded border bg-white p-4"><h2 class="font-semibold">{{ item.name }}</h2><p class="text-sm text-slate-600">{{ item.period_start }} - {{ item.period_end }}</p><p class="mt-2 text-sm">{{ item.description }}</p></div>{% empty %}<p class="text-sm text-slate-500">Belum ada data.</p>{% endfor %}</div>
+{% endblock %}

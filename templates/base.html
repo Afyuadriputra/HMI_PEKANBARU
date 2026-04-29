@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SI-HMI Pekanbaru{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <header class="border-b bg-white">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+      <a href="{% url 'website:home' %}" class="font-semibold">SI-HMI Pekanbaru</a>
+      <nav class="flex gap-4 text-sm">
+        <a href="{% url 'organization:profile' %}">Profil</a>
+        <a href="{% url 'programs:list' %}">Program</a>
+        <a href="{% url 'news:list' %}">Berita</a>
+        <a href="{% url 'events:list' %}">Agenda</a>
+        <a href="{% url 'gallery:list' %}">Galeri</a>
+        <a href="{% url 'registration:list' %}">Pendaftaran</a>
+        <a href="{% url 'news_request:create' %}">Request Berita</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'accounts:dashboard' %}">Dashboard</a>
+        {% else %}
+          <a href="{% url 'accounts:login' %}">Login</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+  <main class="mx-auto max-w-6xl px-4 py-8">
+    {% if messages %}
+      <div class="mb-6 space-y-2">
+        {% for message in messages %}
+          <div class="rounded border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm text-emerald-800">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

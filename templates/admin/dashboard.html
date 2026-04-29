@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Admin{% endblock %}
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+  <h1 class="text-2xl font-semibold">Dashboard Admin</h1>
+  <a href="{% url 'accounts:logout' %}" class="text-sm text-red-700">Logout</a>
+</div>
+<div class="grid gap-4 md:grid-cols-3">
+  {% for label, value in counts.items %}
+    <div class="rounded border bg-white p-4">
+      <div class="text-sm text-slate-500">{{ label }}</div>
+      <div class="mt-2 text-2xl font-semibold">{{ value }}</div>
+    </div>
+  {% endfor %}
+</div>
+<div class="mt-8 grid gap-3 md:grid-cols-4">
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'accounts:user_list' %}">User</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'organization:profile_list' %}">Profil</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'organization:management_list' %}">Pengurus</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'organization:chairman_list' %}">Ketua Umum</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'programs:admin_list' %}">Program</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'news:admin_list' %}">Berita</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'events:admin_list' %}">Agenda</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'gallery:admin_list' %}">Galeri</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'registration:admin_list' %}">Pendaftaran</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'website:setting_list' %}">Setting</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'website:menu_list' %}">Menu</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'cadre:commissariat_list' %}">Komisariat</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'cadre:cadre_list' %}">Kader</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'cadre:alumni_list' %}">Alumni</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'training:level_list' %}">Level LK</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'training:batch_list' %}">Batch LK</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'training:participant_list' %}">Peserta LK</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'training:certificate_list' %}">Sertifikat LK</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'administration:archive_list' %}">Arsip</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'administration:incoming_list' %}">Surat Masuk</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'administration:outgoing_list' %}">Surat Keluar</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'administration:invitation_list' %}">Undangan</a>
+  <a class="rounded border bg-white p-3 text-sm" href="{% url 'news_request:admin_list' %}">Request Berita</a>
+</div>
+{% endblock %}

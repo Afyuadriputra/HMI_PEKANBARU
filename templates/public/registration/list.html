@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4 text-2xl font-semibold">Pendaftaran</h1>
+<div class="space-y-3">{% for item in forms %}<a class="block rounded border bg-white p-4" href="{{ item.google_form_url }}" target="_blank" rel="noopener"><h2 class="font-semibold">{{ item.title }}</h2><p class="text-sm text-slate-600">{{ item.description }}</p></a>{% empty %}<p class="text-sm text-slate-500">Belum ada link pendaftaran.</p>{% endfor %}</div>
+{% endblock %}

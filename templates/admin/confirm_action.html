@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="rounded border bg-white p-6">
+  <h1 class="mb-3 text-xl font-semibold">{{ title }}</h1>
+  <p class="mb-4 text-sm text-slate-600">{{ object }}</p>
+  <form method="post">
+    {% csrf_token %}
+    <button class="rounded bg-green-700 px-4 py-2 text-sm font-medium text-white">{{ button_label }}</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4 text-2xl font-semibold">Galeri</h1>
+<div class="grid gap-4 md:grid-cols-4">{% for item in images %}<figure class="rounded border bg-white p-3">{% if item.image %}<img class="aspect-video w-full object-cover" src="{{ item.image.url }}" alt="{{ item.alt_text }}">{% endif %}<figcaption class="mt-2 text-sm">{{ item.title }}</figcaption></figure>{% empty %}<p class="text-sm text-slate-500">Belum ada galeri.</p>{% endfor %}</div>
+{% endblock %}

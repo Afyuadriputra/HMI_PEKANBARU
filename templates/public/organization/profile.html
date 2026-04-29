@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4 text-2xl font-semibold">Profil Organisasi</h1>
+{% if profile %}
+  <article class="rounded border bg-white p-6">
+    <h2 class="text-xl font-semibold">{{ profile.name }}</h2>
+    <p class="mt-3 text-slate-700">{{ profile.description|linebreaks }}</p>
+    <h3 class="mt-6 font-semibold">Visi</h3>
+    <p>{{ profile.vision|linebreaks }}</p>
+    <h3 class="mt-6 font-semibold">Misi</h3>
+    <p>{{ profile.mission|linebreaks }}</p>
+  </article>
+{% else %}
+  <p class="text-sm text-slate-500">Profil belum tersedia.</p>
+{% endif %}
+{% endblock %}

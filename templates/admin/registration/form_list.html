@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mb-4 flex items-center justify-between"><h1 class="text-xl font-semibold">Link Pendaftaran</h1><a class="rounded bg-green-700 px-3 py-2 text-sm text-white" href="{% url 'registration:create' %}">Tambah</a></div>
+<div class="rounded border bg-white">{% for item in forms %}<div class="flex justify-between border-b p-3 text-sm"><span>{{ item.title }} - {{ item.type }}</span><a class="text-green-700" href="{% url 'registration:update' item.id %}">Edit</a></div>{% empty %}<p class="p-3 text-sm">Belum ada data.</p>{% endfor %}</div>
+{% endblock %}

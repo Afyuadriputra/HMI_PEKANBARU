@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4 text-2xl font-semibold">Berita</h1>
+<div class="grid gap-4 md:grid-cols-3">{% for item in news_posts %}<a class="rounded border bg-white p-4" href="{% url 'news:detail' item.slug %}"><h2 class="font-semibold">{{ item.title }}</h2><p class="mt-2 text-sm text-slate-600">{{ item.excerpt|truncatewords:20 }}</p></a>{% empty %}<p class="text-sm text-slate-500">Belum ada berita.</p>{% endfor %}</div>
+{% endblock %}

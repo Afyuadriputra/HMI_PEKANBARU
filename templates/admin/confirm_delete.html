@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Hapus Data{% endblock %}
+{% block content %}
+<section class="rounded border bg-white p-6">
+  <h1 class="mb-3 text-xl font-semibold">Hapus Data</h1>
+  <p class="mb-4 text-sm text-slate-600">Hapus {{ object }}?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button class="rounded bg-red-700 px-4 py-2 text-sm font-medium text-white">Hapus</button>
+    <a href="{% url cancel_url %}" class="ml-2 rounded border px-4 py-2 text-sm">Batal</a>
+  </form>
+</section>
+{% endblock %}

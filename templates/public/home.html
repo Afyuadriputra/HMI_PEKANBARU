@@ -1,0 +1,160 @@
+{% extends "public/base_public.html" %}
+{% block title %}Beranda HMI Pekanbaru{% endblock %}
+{% block content %}
+<main class="overflow-hidden pb-24 md:pb-0">
+  <section id="beranda" class="relative flex min-h-[85vh] flex-col justify-end overflow-hidden pb-12 pt-32 md:min-h-screen md:items-center md:justify-center md:bg-surface md:pb-24">
+    <div class="absolute inset-0 z-0 md:hidden">
+      <img class="h-full w-full object-cover" src="https://www.indonesia-tourism.com/french/riau/images/gallery/pekanbaru-city-riau-2.jpg" alt="Pemandangan Kota Pekanbaru Riau">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
+    </div>
+    <div class="container relative z-10 mx-auto px-6 md:px-16">
+      <div class="grid items-center gap-16 md:grid-cols-2">
+        <div class="max-w-3xl">
+          <span class="mb-4 inline-block rounded-full bg-tertiary-fixed px-4 py-2 text-[12px] font-bold uppercase tracking-widest text-on-tertiary-fixed shadow-sm md:mb-8 md:text-sz-4">EST. {{ profile.founded_year|default:"1947" }}</span>
+          <h1 class="mb-4 text-sz-1 font-bold leading-tight tracking-tight text-white drop-shadow-md md:mb-8 md:text-primary md:drop-shadow-none">{{ profile.name|default:"Himpunan Mahasiswa Islam Pekanbaru" }}</h1>
+          <p class="mb-8 max-w-[90%] text-sz-4 leading-relaxed text-white/80 md:mb-16 md:max-w-none md:text-sz-3 md:text-secondary">
+            {{ profile.description|default:"Wadah perjuangan intelektual, kepemimpinan, dan pengabdian kader muda Islam dalam mewujudkan masyarakat adil makmur." }}
+          </p>
+          <div class="flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-8">
+            <a href="#profil" class="flex items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-sz-4 font-bold text-white shadow-xl transition hover:bg-primary-container md:rounded-xl md:px-8">Tentang Kami <span class="material-symbols-outlined text-sz-3">arrow_forward</span></a>
+            <a href="#agenda" class="rounded-2xl border border-white/30 bg-white/10 py-4 text-center text-sz-4 font-bold text-white shadow-sm backdrop-blur-md md:rounded-xl md:border-2 md:border-outline/20 md:bg-transparent md:px-8 md:text-secondary">Lihat Kegiatan</a>
+          </div>
+        </div>
+        <div class="relative hidden aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-2xl md:block">
+          <img class="h-full w-full object-cover transition duration-700 hover:scale-105" src="https://www.indonesia-tourism.com/french/riau/images/gallery/pekanbaru-city-riau-2.jpg" alt="Pemandangan Kota Pekanbaru Riau">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="profil" class="bg-surface-container-low py-12 md:flex md:min-h-screen md:items-center md:py-16">
+    <div class="container mx-auto px-6 md:px-16">
+      <div class="grid items-center gap-16 md:grid-cols-2">
+        <div class="relative mx-auto w-full max-w-md md:mx-0">
+          <div class="aspect-square max-h-[480px] overflow-hidden rounded-[32px] shadow-2xl md:aspect-[4/5] md:rounded-2xl">
+            {% if profile.profile_image %}<img class="h-full w-full object-cover" src="{{ profile.profile_image.url }}" alt="{{ profile.name }}">{% else %}<img class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmljfKHK-fB65Qz-aJnm27NxlM_HYlqKVlIv6dnM6AwS30aPW1CwzQZ0WJwxwNXfllefcVOMmDXy0MlkmKnmtYVGV2_FdSEI-Ci_P56ibgYeOFErA8Z-OJTkjoqi9mitJHkLCcD56E3rDeqGao2ftRF-g7UzTszoW7ThvegFJU1Ne4AijvtDC3LDyfuEU-6r1z_JCd-FwqJBn-IdwL5U_mm3ieZvKcG-dMzjaqJFjE37vLfekybkaAIgsfBnkX2JJsXmveTH0m6Grh" alt="Kader HMI">{% endif %}
+          </div>
+          <div class="absolute bottom-4 right-4 flex h-28 w-28 flex-col justify-center rounded-2xl bg-tertiary-fixed p-4 shadow-xl md:-bottom-8 md:-right-8 md:h-48 md:w-48 md:p-6">
+            <span class="mb-1 block text-sz-2 font-bold text-primary md:mb-2">75+</span>
+            <span class="text-[10px] font-bold leading-tight text-on-tertiary-fixed-variant md:text-sz-4">Tahun melahirkan pemimpin bangsa</span>
+          </div>
+        </div>
+        <div class="mx-auto max-w-xl md:mx-0">
+          <h2 class="mb-6 text-sz-1 font-bold text-primary md:mb-8">Identitas Organisasi</h2>
+          <p class="mb-8 text-sz-4 leading-relaxed text-secondary">{{ profile.history|default:"Himpunan Mahasiswa Islam (HMI) Cabang Pekanbaru merupakan bagian integral dari perjuangan HMI di tingkat nasional. Berfokus pada pembinaan kepribadian kader yang memiliki kualitas insan cita." }}</p>
+          <ul class="space-y-6">
+            <li class="flex items-start gap-4"><span class="material-symbols-outlined rounded-xl bg-tertiary/10 p-2 text-sz-2 text-tertiary md:bg-transparent md:p-0">school</span><div><h4 class="mb-1 text-sz-3 font-bold text-primary md:mb-2">Intelektualitas</h4><p class="text-sz-4 text-secondary">Mengedepankan kajian kritis dan dialog ilmiah dalam setiap gerak.</p></div></li>
+            <li class="flex items-start gap-4"><span class="material-symbols-outlined rounded-xl bg-tertiary/10 p-2 text-sz-2 text-tertiary md:bg-transparent md:p-0">groups</span><div><h4 class="mb-1 text-sz-3 font-bold text-primary md:mb-2">Kepemimpinan</h4><p class="text-sz-4 text-secondary">Menempa kader menjadi pemimpin masa depan yang berintegritas.</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative bg-surface py-12 md:flex md:min-h-screen md:items-center md:py-16">
+    <div class="absolute left-1/4 top-1/4 h-[400px] w-[400px] rounded-full bg-primary/10 blur-3xl"></div>
+    <div class="container relative z-10 mx-auto px-6 md:px-16">
+      <div class="mx-auto mb-8 max-w-3xl text-center md:mb-12">
+        <h2 class="mb-4 text-sz-1 font-bold text-primary md:mb-8">Fondasi Perjuangan</h2>
+        <div class="mx-auto h-1.5 w-16 rounded-full bg-tertiary md:h-2 md:w-24"></div>
+      </div>
+      <div class="flex snap-x gap-4 overflow-x-auto pb-8 hide-scrollbar md:grid md:grid-cols-3 md:gap-8 md:overflow-visible">
+        <div class="min-w-[85vw] snap-center rounded-[24px] border border-white bg-white/60 p-6 shadow-sm backdrop-blur-xl md:min-w-0 md:rounded-[32px] md:border-2 md:p-8"><span class="material-symbols-outlined mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-sz-2 text-primary">visibility</span><h3 class="mb-3 text-sz-2 font-bold text-primary">Visi</h3><p class="text-sz-4 leading-relaxed text-secondary">{{ profile.vision|default:"Terbinanya insan akademis, pencipta, pengabdi yang bernafaskan Islam, dan bertangung jawab atas terwujudnya masyarakat adil makmur." }}</p></div>
+        <div class="min-w-[85vw] snap-center rounded-[24px] border border-white bg-white/60 p-6 shadow-sm backdrop-blur-xl md:min-w-0 md:rounded-[32px] md:border-2 md:p-8"><span class="material-symbols-outlined mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-sz-2 text-primary">assignment</span><h3 class="mb-3 text-sz-2 font-bold text-primary">Misi</h3><p class="text-sz-4 leading-relaxed text-secondary">{{ profile.mission|default:"Melaksanakan perkaderan yang berkualitas, mengembangkan potensi intelektual mahasiswa, dan aktif dalam pengabdian." }}</p></div>
+        <div class="min-w-[85vw] snap-center rounded-[24px] border border-white bg-white/60 p-6 shadow-sm backdrop-blur-xl md:min-w-0 md:rounded-[32px] md:border-2 md:p-8"><span class="material-symbols-outlined mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-sz-2 text-primary">stars</span><h3 class="mb-3 text-sz-2 font-bold text-primary">Nilai Utama</h3><p class="text-sz-4 leading-relaxed text-secondary">Iman, Ilmu, dan Amal sebagai pilar utama dalam setiap langkah perjuangan organisasi untuk agama dan bangsa.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pengurus" class="bg-surface-container-low py-12 md:flex md:min-h-screen md:items-center md:py-16">
+    <div class="container mx-auto px-6 md:px-16">
+      <h2 class="mb-8 text-center text-sz-1 font-bold text-primary md:mb-12">Struktur Kepengurusan</h2>
+      <div class="flex snap-x gap-4 overflow-x-auto pb-8 hide-scrollbar md:mx-auto md:grid md:max-w-5xl md:grid-cols-3 md:gap-8 md:overflow-visible">
+        {% for item in management_members|slice:":3" %}
+          <div class="group relative aspect-[4/5] min-w-[75vw] snap-center overflow-hidden rounded-[24px] shadow-lg md:min-w-0 md:rounded-[32px]">
+            {% if item.photo %}<img class="h-full w-full object-cover transition duration-700 group-hover:scale-110" src="{{ item.photo.url }}" alt="{{ item.name }}">{% else %}<img class="h-full w-full object-cover transition duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhZKsW-ZsJAhjOyU_k1unm8yYLMTT2HlMpdzopRxfg8TUMZnCzOclc0fGrb3eCxpCNbBDw-QQ1eTq6n57HF34_pze1l6RG-10_VJjlTmcifgbtMwVO-RFs_BCtP1F7C4bmx_BcywawdQd-eFQS2vYallyekO5_TwQOQGYlH036cw6ztOEkxrGDXYtty_IqISiQqfMjnhjZt-DKjqAoYJ9yDkgzgX5RKXG2jfOkJNZeV7-zyGATv0X-U4G9y6_9md24bLfkpIfWB0R-" alt="{{ item.name }}">{% endif %}
+            <div class="absolute bottom-3 left-3 right-3 rounded-2xl border border-white bg-white/70 p-4 backdrop-blur-md md:bottom-4 md:left-4 md:right-4 md:border-2 md:p-6"><h3 class="mb-1 text-sz-3 font-bold text-primary">{{ item.name }}</h3><p class="text-sz-4 font-medium text-secondary">{{ item.position }}</p></div>
+          </div>
+        {% empty %}
+          <p class="text-sm text-secondary">Belum ada data pengurus.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="program" class="bg-surface py-12 md:flex md:min-h-screen md:items-center md:py-16">
+    <div class="container mx-auto px-6 md:px-16">
+      <div class="mb-8 flex flex-col gap-4 md:mb-12 md:flex-row md:items-end md:justify-between">
+        <div class="max-w-2xl"><h2 class="mb-2 text-sz-1 font-bold text-primary md:mb-4">Program Strategis</h2><p class="text-sz-4 leading-relaxed text-secondary">Inisiatif kami untuk membangun kapasitas intelektual dan kepedulian sosial di kalangan mahasiswa.</p></div>
+        <a href="{% url 'programs:list' %}" class="hidden rounded-xl border-2 border-white/60 bg-white/50 px-6 py-4 text-sz-4 font-bold text-primary backdrop-blur-md md:flex">Semua Program <span class="material-symbols-outlined text-sz-3">arrow_forward</span></a>
+      </div>
+      <div class="grid gap-4 md:grid-cols-4 md:gap-6">
+        {% for item in programs|slice:":4" %}
+          <a href="{% url 'programs:detail' item.slug %}" class="{% if forloop.first %}relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-[24px] shadow-lg md:col-span-2 md:row-span-2 md:min-h-[360px] md:rounded-[32px]{% else %}flex items-center gap-4 rounded-[24px] border border-outline/10 bg-white/60 p-5 shadow-sm backdrop-blur-md md:block md:rounded-[32px] md:border-2 md:border-white/60 md:bg-white/40 md:p-6{% endif %}">
+            {% if forloop.first %}
+              {% if item.image %}<img class="absolute inset-0 h-full w-full object-cover" src="{{ item.image.url }}" alt="{{ item.title }}">{% else %}<img class="absolute inset-0 h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMLIR6zglLqXdEfuPbdqUFWl4ORkyOmf95rMhMPUxUrUUTt-LhmD3Lisk9l7pkVNKZk-5PBnvh4FB0go1RHZ154XjucqtiSg0zor21Aqh2DuroprWh-d8DuLd5VhMDTu_xb4MrRc2T4lE9lec6yIZbEAG_yYgse5wUmCgeItcCYteMZ_ueYnGEsmVV6nrFzyvKHdu4NiiTN302VqtjeZHBdunVhGdUAIg9x467EAaVVpUJ2Rt6p1hA1vod9Q9rcVVzMIpVOzR1AUFH" alt="{{ item.title }}">{% endif %}
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div><div class="relative z-10 p-6"><span class="mb-3 inline-block rounded-lg bg-primary px-3 py-1 text-[12px] font-bold uppercase tracking-widest text-white">UTAMA</span><h3 class="mb-2 text-sz-2 font-bold text-white">{{ item.title }}</h3><p class="mb-4 text-sz-4 text-white/80">{{ item.description|truncatewords:18 }}</p></div>
+            {% else %}
+              <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-surface text-primary md:mb-6 md:h-16 md:w-16"><span class="material-symbols-outlined text-sz-2">{{ item.icon|default:"menu_book" }}</span></div><div><h3 class="mb-1 text-sz-3 font-bold text-primary">{{ item.title }}</h3><p class="line-clamp-2 text-sz-4 text-secondary">{{ item.description }}</p></div>
+            {% endif %}
+          </a>
+        {% empty %}
+          <p class="text-sm text-secondary">Belum ada program.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="berita" class="bg-surface-container-low py-12 md:flex md:min-h-screen md:items-center md:py-16">
+    <div class="container mx-auto px-6 md:px-16">
+      <div class="mx-auto mb-8 flex max-w-6xl items-end justify-between md:mb-12"><div><h2 class="text-sz-1 font-bold text-primary">Warta Organisasi</h2><p class="hidden text-sz-4 text-secondary md:block">Informasi, opini, dan pergerakan terkini dari kader HMI.</p></div><a href="{% url 'news:list' %}" class="hidden rounded-xl border-2 border-white/60 bg-white/40 px-8 py-4 text-sz-4 font-bold text-primary md:block">Indeks Berita</a></div>
+      <div class="mx-auto grid max-w-6xl gap-4 md:grid-cols-3 md:gap-8">
+        {% for item in news_posts|slice:":3" %}
+          <a href="{% url 'news:detail' item.slug %}" class="flex items-center gap-4 rounded-[24px] bg-white p-3 shadow-sm md:block md:rounded-[32px] md:border-2 md:border-white/60 md:bg-white/40 md:p-4 md:backdrop-blur-xl">
+            <div class="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-[16px] md:mb-6 md:aspect-video md:h-auto md:w-full md:rounded-2xl"><span class="absolute left-1 top-1 z-20 rounded bg-white/80 px-2 py-0.5 text-[8px] font-bold uppercase text-tertiary md:left-4 md:top-4 md:rounded-xl md:px-4 md:py-2 md:text-sz-4">{{ item.category.name|default:"BERITA" }}</span>{% if item.image %}<img class="h-full w-full object-cover" src="{{ item.image.url }}" alt="{{ item.title }}">{% else %}<img class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfXDWUepq-HDpzCsWqOXgREaiIElQo4Dcyz479ZoD42emvO3MPQ6H3Cu1bVFhFZVptu58UmGNsmxsqtJmiFLsOFkfUyXwMnQ84bT3CHhs_s8fKYdVYVELNoB_qPx17dSu-N5bNpzFhUTRaDcPiPTAwdzNpy8FS12Z_hl0bVjmb3G5pqXwp1MHl1lC6asXqrAXfTVCvtgQUJY9idAnccO3absNUIUr2X3Akd7hMklvVODyWXn8abBs5t-MoowyxMKy5iUp8L1kYMvFw" alt="{{ item.title }}">{% endif %}</div>
+            <div class="md:px-4 md:pb-4"><span class="mb-1 block text-[12px] font-medium text-secondary md:mb-4 md:text-sz-4">{{ item.published_at|date:"d M Y" }}</span><h3 class="line-clamp-2 text-sz-4 font-bold leading-snug text-primary md:mb-4 md:text-sz-3">{{ item.title }}</h3><p class="hidden text-sz-4 leading-relaxed text-secondary md:line-clamp-2 md:block">{{ item.excerpt }}</p></div>
+          </a>
+        {% empty %}<p class="text-sm text-secondary">Belum ada berita.</p>{% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="agenda" class="bg-surface py-12 md:flex md:min-h-screen md:items-center md:py-16">
+    <div class="container mx-auto px-6 md:px-16">
+      <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-5">
+        <div class="md:col-span-3"><h2 class="mb-6 text-sz-1 font-bold text-primary md:mb-8">Agenda Mendatang</h2>{% with event=events.0 %}<div class="relative flex aspect-[4/3] items-end overflow-hidden rounded-[24px] shadow-md md:h-[400px] md:aspect-auto md:rounded-[32px]">{% if event.image %}<img class="absolute inset-0 h-full w-full object-cover" src="{{ event.image.url }}" alt="{{ event.title }}">{% else %}<img class="absolute inset-0 h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvKUDGMUEXPR_FJNk_oylibzyw_fzEaeDO6P-SmSzvjbxNTDQ1QqwAYMJPXdhBCY3fHNnzkAAlga_wv5d1_KQwTgFdd1e7eiptvRsPUAtQ72vZihgRNugrycsTZWy-F9KXKX_LT7xION94U9Oz7ol6ihEVHP6WWM4KNm_AJ9FzDNHtu6V2QOWXDFvbYxJHtV6MNWKfnh8_WeegKyzCxYlNhBeAW6B2kvfhP51J5FzN1nlV0YmBYuaPqkqBACpCOymGicqTxETwFgyV" alt="Agenda">{% endif %}<div class="relative m-4 w-full rounded-2xl border border-white/20 bg-black/40 p-4 backdrop-blur-md md:m-6 md:p-6"><span class="mb-2 inline-block rounded bg-tertiary px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white md:mb-4 md:rounded-lg md:px-4 md:py-2 md:text-sz-4">UTAMA</span><h3 class="mb-2 text-sz-3 font-bold text-white md:text-sz-2">{{ event.title|default:"Intermediate Training (LK II) Nasional" }}</h3><p class="hidden text-sz-4 text-white/90 md:mb-6 md:line-clamp-2 md:block">{{ event.description }}</p><span class="text-[12px] text-white md:text-sz-4">{{ event.start_date|date:"d M Y" }} - {{ event.location|default:"Pekanbaru" }}</span></div></div>{% endwith %}</div>
+        <div class="md:col-span-2"><div class="rounded-[24px] border border-outline/10 bg-white p-6 shadow-sm md:h-full md:rounded-[32px] md:border-2 md:border-white/60 md:bg-white/50 md:p-8 md:backdrop-blur-xl"><h4 class="mb-6 border-b border-outline/10 pb-4 text-sz-3 font-bold text-primary md:mb-8 md:text-sz-2">Timeline Kegiatan</h4><div class="space-y-4 md:space-y-6">{% for item in events|slice:":3" %}<a href="{% url 'events:detail' item.slug %}" class="flex items-center gap-4 border-b border-outline/5 pb-4 md:gap-6"><div class="min-w-[50px] rounded-xl bg-surface py-2 text-center md:min-w-[64px]"><span class="mb-1 block text-sz-3 font-bold leading-none text-tertiary md:text-sz-2">{{ item.start_date|date:"d" }}</span><span class="text-[10px] font-bold uppercase text-secondary md:text-[12px]">{{ item.start_date|date:"M" }}</span></div><div><h5 class="mb-1 text-sz-4 font-bold text-primary md:text-sz-3">{{ item.title }}</h5><p class="text-[12px] text-secondary md:text-sz-4">{{ item.location }}</p></div></a>{% empty %}<p class="text-sm text-secondary">Belum ada agenda.</p>{% endfor %}</div><a href="{% url 'events:list' %}" class="mt-6 block w-full rounded-xl bg-surface py-3 text-center text-sz-4 font-bold text-primary md:mt-8">Seluruh Agenda</a></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeri" class="bg-surface-container-low py-12 md:flex md:min-h-screen md:items-center md:py-16">
+    <div class="container mx-auto px-6 md:px-16">
+      <div class="mx-auto mb-8 max-w-2xl text-center md:mb-12"><h2 class="mb-4 text-sz-1 font-bold text-primary">Jejak Langkah</h2><p class="text-sz-4 text-secondary">Potret dinamika, perjuangan, dan pengabdian kader HMI Cabang Pekanbaru.</p></div>
+      <div class="mx-auto grid max-w-6xl grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">{% for item in gallery_images|slice:":4" %}<div class="aspect-square overflow-hidden rounded-[20px] shadow-sm md:rounded-[24px] md:bg-white/40 md:p-2">{% if item.image %}<img class="h-full w-full rounded-[16px] object-cover" src="{{ item.image.url }}" alt="{{ item.alt_text|default:item.title }}">{% else %}<img class="h-full w-full rounded-[16px] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwXK1kMnT1GzzJr016cwDYPTG96Y4VPcma7LtHqhEjmfdU7dOShTzrv_T1qCQfIys8kZJEMgG8eUctCLg1aRLGhpvHB_BdTHwNZ3e9wY17QlylpXhPoYRVUj7_3dVVwpOiuweFph5hpZ7_f9rs3FBkJfi5dJSFCntUH4Yitky_64-E06GwAXX__lFkcD4lDS7Io30LNvEd2frx2QO0kcyo5NehoO4ODLcFXMxOa5PdC2SH6vFwRK4gGYfWgPMWU_-h_Pv5agtW5pw2" alt="Galeri">{% endif %}</div>{% empty %}<p class="text-sm text-secondary">Belum ada galeri.</p>{% endfor %}</div>
+      <div class="mt-8 text-center md:mt-12"><a href="{% url 'gallery:list' %}" class="inline-block w-full rounded-2xl border border-outline/20 bg-white py-4 text-sz-4 font-bold text-primary shadow-sm md:w-auto md:rounded-xl md:border-2 md:border-white/80 md:bg-white/50 md:px-8">Lihat Semua Foto</a></div>
+    </div>
+  </section>
+
+  <section class="relative bg-primary py-12 md:flex md:min-h-screen md:items-center md:py-16">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent opacity-20"></div>
+    <div class="container relative z-10 mx-auto px-6 md:px-16">
+      <div class="mx-auto max-w-5xl text-center text-on-primary md:rounded-[40px] md:border md:border-white/20 md:bg-white/10 md:p-24 md:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] md:backdrop-blur-2xl">
+        <h2 class="mb-4 text-sz-1 font-bold leading-tight tracking-tight md:mb-8">Siap Menjadi Bagian dari Perubahan?</h2>
+        <p class="mx-auto mb-8 max-w-3xl text-sz-4 font-light leading-relaxed opacity-90 md:mb-12 md:text-sz-3">Bergabunglah bersama ribuan intelektual muda Islam lainnya. Mari berkolaborasi membangun masa depan Indonesia yang lebih baik dan bermartabat.</p>
+        <div class="flex flex-col justify-center gap-4 md:flex-row md:gap-6">{% with reg=registration_forms.0 %}<a href="{{ reg.google_form_url|default:'#' }}" class="flex items-center justify-center gap-2 rounded-2xl bg-tertiary-fixed py-4 text-sz-4 font-bold text-on-tertiary-fixed shadow-xl md:px-10 md:py-5">Daftar Jadi Kader <span class="material-symbols-outlined text-sz-4">how_to_reg</span></a>{% endwith %}<a href="#kontak" class="rounded-2xl border border-white/30 bg-black/20 py-4 text-sz-4 font-bold text-white md:px-10 md:py-5">Hubungi Sekretariat</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="kontak" class="border-t border-outline/10 bg-surface-container-high px-6 py-12 md:px-16 md:pb-8 md:pt-24">
+    <div class="mx-auto grid max-w-screen-2xl gap-8 md:grid-cols-12 md:gap-16">
+      <div class="text-center md:col-span-5 md:text-left"><div class="mb-4 flex flex-col items-center gap-4 md:mb-8 md:flex-row"><img src="https://hmipemkabriau.com/img/logohmi.png" alt="Logo" class="h-16"><span class="text-sz-2 font-bold tracking-tight text-primary">HMI Pekanbaru</span></div><p class="mx-auto max-w-md text-[12px] leading-relaxed text-secondary md:mx-0 md:text-sz-4">Organisasi mahasiswa Islam tertua dan terbesar di Indonesia. Berkomitmen melahirkan insan cita untuk kemajuan agama, bangsa, dan negara.</p></div>
+      <div class="hidden md:col-span-2 md:block"><h4 class="mb-8 text-sz-3 font-bold text-primary">Navigasi</h4><ul class="space-y-4 text-sz-4 text-secondary"><li><a href="#beranda">Beranda</a></li><li><a href="#profil">Profil Organisasi</a></li><li><a href="#pengurus">Struktur Pengurus</a></li><li><a href="#program">Program Kerja</a></li><li><a href="#berita">Berita & Artikel</a></li></ul></div>
+      <div class="rounded-[24px] bg-white p-6 shadow-sm md:col-span-3 md:bg-transparent md:p-0 md:shadow-none"><h4 class="mb-4 text-center text-sz-4 font-bold text-primary md:mb-8 md:text-left md:text-sz-3">Hubungi Kami</h4><ul class="space-y-4 text-[12px] text-secondary md:space-y-6 md:text-sz-4"><li class="flex items-start gap-3 md:gap-4"><span class="material-symbols-outlined text-[16px] text-tertiary md:text-sz-3">location_on</span><span>{{ profile.address|default:"Jl. Melayu No. 12, Marpoyan Damai, Pekanbaru, Riau 28282" }}</span></li><li class="flex items-center gap-3 md:gap-4"><span class="material-symbols-outlined text-[16px] text-tertiary md:text-sz-3">mail</span><a href="mailto:{{ profile.email|default:'sekretariat@hmipekanbaru.or.id' }}">{{ profile.email|default:"sekretariat@hmipekanbaru.or.id" }}</a></li><li class="flex items-center gap-3 md:gap-4"><span class="material-symbols-outlined text-[16px] text-tertiary md:text-sz-3">call</span><a href="tel:{{ profile.phone|default:'+627611234567' }}">{{ profile.phone|default:"(0761) 123 4567" }}</a></li></ul></div>
+      <div class="hidden md:col-span-2 md:block"><h4 class="mb-8 text-sz-3 font-bold text-primary">Informasi</h4><ul class="space-y-4 text-sz-4 text-secondary"><li><a href="#">Kebijakan Privasi</a></li><li><a href="#">Syarat & Ketentuan</a></li><li><a href="#">AD/ART Organisasi</a></li></ul></div>
+    </div>
+    <div class="mx-auto mt-8 border-t border-outline/10 pt-8 text-center md:mt-24 md:flex md:max-w-screen-2xl md:items-center md:justify-between md:text-left"><p class="text-[10px] font-medium text-secondary md:text-sz-4">© 2026 Himpunan Mahasiswa Islam Cabang Pekanbaru. Yakinkan dengan Iman, Usahakan dengan Ilmu, Sampaikan dengan Amal.</p><button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="mt-6 hidden h-12 w-12 items-center justify-center rounded-full bg-surface text-primary shadow-sm md:flex"><span class="material-symbols-outlined text-sz-3">arrow_upward</span></button></div>
+  </footer>
+</main>
+{% endblock %}
